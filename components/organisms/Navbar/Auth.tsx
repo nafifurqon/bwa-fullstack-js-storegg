@@ -7,8 +7,6 @@ interface AuthProps {
 export default function Auth(props: Partial<AuthProps>) {
   const { isLogin } = props;
 
-  console.log('isLogin', isLogin);
-
   if (isLogin) {
     return (
       <li className="nav-item my-auto dropdown d-flex">
