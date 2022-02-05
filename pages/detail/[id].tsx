@@ -19,7 +19,7 @@ export default function Detail() {
   const getVoucherDetailAPI = useCallback(async (id) => {
     const data = await getDetailVoucher(id);
     console.log('data :>> ', data);
-    setDataItem(data);
+    setDataItem(data.detail);
   }, [getDetailVoucher]);
 
   useEffect(() => {
