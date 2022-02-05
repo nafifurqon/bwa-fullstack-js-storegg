@@ -15,19 +15,20 @@ export default function Detail() {
       name: '',
     },
   });
+  const [nominals, setNominals] = useState([]);
+  const [payments, setPayments] = useState([]);
 
   const getVoucherDetailAPI = useCallback(async (id) => {
     const data = await getDetailVoucher(id);
     console.log('data :>> ', data);
     setDataItem(data.detail);
+    setNominals(data.detail.nominals);
+    setPayments(data.payment);
   }, [getDetailVoucher]);
 
   useEffect(() => {
     if (isReady) {
-      console.log('router sudah siap', query.id);
       getVoucherDetailAPI(query.id);
-    } else {
-      console.log('router tidak tersedia');
     }
   }, [isReady]);
 
@@ -47,7 +48,7 @@ export default function Detail() {
             <div className="col-xl-9 col-lg-8 col-md-7 ps-md-25">
               <TopUpItem data={dataItem} type="desktop" />
               <hr />
-              <TopUpForm />
+              <TopUpForm nominals={nominals} payments={payments} />
             </div>
           </div>
         </div>

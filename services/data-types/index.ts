@@ -11,3 +11,11 @@ export interface GameItemTypes {
     category: CategoryTypes;
     thumbnail: string;
 }
+
+export interface NominalTypes {
+  _id: string;
+  coinQuantity: number;
+  coinName: string;
+  price: number;
+  __v: number;
+}
