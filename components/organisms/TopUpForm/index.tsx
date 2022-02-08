@@ -1,11 +1,11 @@
 import React from 'react';
-import { NominalTypes } from '../../../services/data-types';
+import { BanksTypes, NominalsTypes, PaymentTypes } from '../../../services/data-types';
 import NominalItem from './NominalItem';
 import PaymentItem from './PaymentItem';
 
 interface TopUpFormProps {
-  nominals: Array<NominalTypes>,
-  payments: Array<any>;
+  nominals: NominalsTypes[],
+  payments: PaymentTypes[];
 }
 
 export default function TopUpForm(props: TopUpFormProps) {
@@ -33,7 +33,7 @@ export default function TopUpForm(props: TopUpFormProps) {
       <div className="pt-md-50 pb-md-50 pt-30 pb-20">
         <p className="text-lg fw-medium color-palette-1 mb-md-10 mb-0">Nominal Top Up</p>
         <div className="row justify-content-between">
-          {nominals.map((nominal: any) => (
+          {nominals.map((nominal: NominalsTypes) => (
             <NominalItem
               key={nominal._id}
               _id={nominal._id}
@@ -50,7 +50,7 @@ export default function TopUpForm(props: TopUpFormProps) {
         <fieldset id="paymentMethod">
           <div className="row justify-content-between">
             {payments.map((payment) => (
-              payment.banks.map((bank: any) => (
+              payment.banks.map((bank: BanksTypes) => (
                 <PaymentItem
                   bankID={bank._id}
                   type={payment.type}
