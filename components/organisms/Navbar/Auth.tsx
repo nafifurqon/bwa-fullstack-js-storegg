@@ -23,7 +23,7 @@ export default function Auth() {
       const IMG = process.env.NEXT_PUBLIC_IMAGE;
       userFromPayload.avatar = `${IMG}/${userFromPayload.avatar}`;
 
-      setUser(payload.player);
+      setUser(userFromPayload);
       setIsLogin(true);
     }
   }, []);
