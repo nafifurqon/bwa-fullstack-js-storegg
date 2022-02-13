@@ -1,7 +1,26 @@
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { CountTypes } from '../../../services/data-types';
+import { getMemberOverview } from '../../../services/player';
 import Category from './Category';
 import TableRow from './TableRow';
 
 export default function OverviewContent() {
+  const [counts, setCounts] = useState([]);
+  const [data, setData] = useState([]);
+
+  useEffect(async () => {
+    const response = await getMemberOverview();
+
+    if (response.error) {
+      toast.error(response.message);
+    } else {
+      console.log('response :>> ', response.data);
+      setCounts(response.data.counts);
+      setData(response.data.data);
+    }
+  }, []);
+
   return (
     <main className="main-wrapper">
       <div className="ps-lg-0">
@@ -10,24 +29,14 @@ export default function OverviewContent() {
           <p className="text-lg fw-medium color-palette-1 mb-14">Top Up Categories</p>
           <div className="main-content">
             <div className="row">
-              <Category nominal={18000500} icon="ic-desktop">
-                Game
-                <br />
-                {' '}
-                Desktop
-              </Category>
-              <Category nominal={8455000} icon="ic-mobile">
-                Game
-                <br />
-                {' '}
-                Mobile
-              </Category>
-              <Category nominal={5000000} icon="ic-desktop">
-                Other
-                <br />
-                {' '}
-                Categories
-              </Category>
+              {counts.map((item: CountTypes) => (
+                <Category key={item._id} nominal={item.value} icon={item.name === 'Desktop' ? 'ic-desktop' : 'ic-mobile'}>
+                  Game
+                  <br />
+                  {' '}
+                  {item.name}
+                </Category>
+              ))}
             </div>
           </div>
         </div>

@@ -61,3 +61,9 @@ export interface CheckoutTypes {
   name: string;
   accountUser: string;
 }
+
+export interface CountTypes {
+  name: string;
+  value: number;
+  _id: string;
+}
