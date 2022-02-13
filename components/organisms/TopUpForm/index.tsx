@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BanksTypes, NominalsTypes, PaymentTypes } from '../../../services/data-types';
 import NominalItem from './NominalItem';
@@ -12,9 +13,35 @@ export default function TopUpForm(props: TopUpFormProps) {
   const { nominals, payments } = props;
 
   const [verifyID, setVerifyID] = useState('');
+  const [bankAccountName, setBankAccountName] = useState('');
+  const [nominalItem, setNominalItem] = useState<NominalsTypes | {}>({});
+  const [paymentItem, setPaymentItem] = useState({});
+
+  const router = useRouter();
 
   const onNominalItemChange = (data: NominalsTypes): void => {
-    localStorage.setItem('nominal-item', JSON.stringify(data));
+    setNominalItem(data);
+  };
+
+  const onPaymentItemChange = (payment: PaymentTypes, bank: BanksTypes) => {
+    const data = { payment, bank };
+    setPaymentItem(data);
+  };
+
+  const onSubmit = () => {
+    if (verifyID === '' || bankAccountName === '' || nominalItem === {} || paymentItem === {}) {
+      alert('Semua kolom input wajib diisi.');
+    } else {
+      const data = {
+        verifyID,
+        bankAccountName,
+        nominalItem,
+        paymentItem,
+      };
+
+      localStorage.setItem('data-topup', JSON.stringify(data));
+      router.push('/checkout');
+    }
   };
 
   return (
@@ -56,13 +83,14 @@ export default function TopUpForm(props: TopUpFormProps) {
         <p className="text-lg fw-medium color-palette-1 mb-md-10 mb-0">Payment Method</p>
         <fieldset id="paymentMethod">
           <div className="row justify-content-between">
-            {payments.map((payment) => (
+            {payments.map((payment: PaymentTypes) => (
               payment.banks.map((bank: BanksTypes) => (
                 <PaymentItem
                   key={bank._id}
                   bankID={bank._id}
                   type={payment.type}
                   name={bank.bankName}
+                  onChange={() => onPaymentItemChange(payment, bank)}
                 />
               ))))}
             <div className="col-lg-4 col-sm-6" />
@@ -80,16 +108,18 @@ export default function TopUpForm(props: TopUpFormProps) {
           name="bankAccount"
           aria-describedby="bankAccount"
           placeholder="Enter your Bank Account Name"
+          value={bankAccountName}
+          onChange={(event) => setBankAccountName(event.target.value)}
         />
       </div>
       <div className="d-sm-block d-flex flex-column w-100">
-        <a
-          href="/checkout"
-          type="submit"
+        <button
+          type="button"
           className="btn btn-submit rounded-pill fw-medium text-white border-0 text-lg"
+          onClick={onSubmit}
         >
           Continue
-        </a>
+        </button>
       </div>
     </form>
   );

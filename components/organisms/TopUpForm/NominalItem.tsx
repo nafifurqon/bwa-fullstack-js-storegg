@@ -28,7 +28,7 @@ export default function NominalItem(props: NominalItemProps) {
         id={_id}
         name="topup"
         value={_id}
-        onChange={(event) => onChange(event)}
+        onChange={() => onChange()}
       />
       <div className="detail-card">
         <div className="d-flex justify-content-between">

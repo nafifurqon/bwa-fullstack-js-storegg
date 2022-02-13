@@ -2,10 +2,16 @@ interface PaymentItemProps {
   bankID: string;
   type: string;
   name: string;
+  onChange: Function;
 }
 
 export default function PaymentItem(props: PaymentItemProps) {
-  const { bankID, type, name } = props;
+  const {
+    bankID,
+    type,
+    name,
+    onChange,
+  } = props;
 
   return (
     <label
@@ -18,6 +24,7 @@ export default function PaymentItem(props: PaymentItemProps) {
         id={bankID}
         name="paymentMethod"
         value={bankID}
+        onChange={() => onChange()}
       />
       <div className="detail-card">
         <div className="d-flex justify-content-between">
