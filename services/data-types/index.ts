@@ -67,3 +67,16 @@ export interface CountTypes {
   value: number;
   _id: string;
 }
+
+export interface HistoryVoucherTopupTypes extends NominalsTypes {
+  gameName: string;
+  category: string;
+  thumbnail: string;
+}
+
+export interface MemberOverviewDataTypes {
+  historyVoucherTopup: HistoryVoucherTopupTypes;
+  status: string;
+  _id: string;
+  value: number;
+}

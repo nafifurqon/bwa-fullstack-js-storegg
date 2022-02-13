@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { CountTypes } from '../../../services/data-types';
+import { CountTypes, MemberOverviewDataTypes } from '../../../services/data-types';
 import { getMemberOverview } from '../../../services/player';
 import Category from './Category';
 import TableRow from './TableRow';
@@ -21,6 +21,8 @@ export default function OverviewContent() {
     }
   }, []);
 
+  const IMG = process.env.NEXT_PUBLIC_IMAGE;
+
   return (
     <main className="main-wrapper">
       <div className="ps-lg-0">
@@ -31,9 +33,6 @@ export default function OverviewContent() {
             <div className="row">
               {counts.map((item: CountTypes) => (
                 <Category key={item._id} nominal={item.value} icon={item.name === 'Desktop' ? 'ic-desktop' : 'ic-mobile'}>
-                  Game
-                  <br />
-                  {' '}
                   {item.name}
                 </Category>
               ))}
@@ -53,15 +52,18 @@ export default function OverviewContent() {
                 </tr>
               </thead>
               <tbody>
-                <TableRow
-                  title="Mobile Legends: The New Battle 2021"
-                  category="Desktop"
-                  item={200}
-                  price={290000}
-                  status="Pending"
-                  image="overview-1"
-                />
-                <TableRow
+                {data.map((item: MemberOverviewDataTypes) => (
+                  <TableRow
+                    key={item._id}
+                    title={item.historyVoucherTopup.gameName}
+                    category={item.historyVoucherTopup.category}
+                    item={`${item.historyVoucherTopup.coinQuantity} ${item.historyVoucherTopup.coinName}`}
+                    price={item.value}
+                    status="Pending"
+                    image={`${IMG}/${item.historyVoucherTopup.thumbnail}`}
+                  />
+                ))}
+                {/* <TableRow
                   title="Call of Duty:Modern"
                   category="Desktop"
                   item={550}
@@ -84,7 +86,7 @@ export default function OverviewContent() {
                   price={200000}
                   status="Pending"
                   image="overview-4"
-                />
+                /> */}
               </tbody>
             </table>
           </div>

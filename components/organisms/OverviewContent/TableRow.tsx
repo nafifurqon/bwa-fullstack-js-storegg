@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import cx from 'classnames';
+import NumberFormat from 'react-number-format';
 
 interface TableRowProps {
   title: string;
   category: string;
-  item: number;
+  item: string;
   price: number;
   status: 'Success' | 'Pending' | 'Failed';
   image: string;
@@ -27,7 +28,7 @@ export default function TableRow(props: TableRowProps) {
       <th scope="row">
         <span className="float-start me-3 mb-lg-0 mb-3">
           <Image
-            src={`/img/${image}.png`}
+            src={image}
             width={80}
             height={60}
             alt="game thumb"
@@ -43,19 +44,24 @@ export default function TableRow(props: TableRowProps) {
       <td>
         <p className="fw-medium color-palette-1 m-0">
           {item}
-          {' '}
-          Gold
         </p>
       </td>
       <td>
-        <p className="fw-medium text-start color-palette-1 m-0">{price}</p>
+        <p className="fw-medium text-start color-palette-1 m-0">
+          <NumberFormat
+            value={price}
+            prefix="Rp. "
+            displayType="text"
+            thousandSeparator="."
+            decimalSeparator=","
+          />
+        </p>
       </td>
       <td>
         <div>
           <span className={statusClass} />
           <p className="fw-medium text-start color-palette-1 m-0 position-relative">
             {status}
-
           </p>
         </div>
       </td>
