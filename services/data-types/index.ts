@@ -62,10 +62,8 @@ export interface CheckoutTypes {
   accountUser: string;
 }
 
-export interface CountTypes {
-  name: string;
+export interface TopUpCategoriesTypes extends CategoryTypes {
   value: number;
-  _id: string;
 }
 
 export interface HistoryVoucherTopupTypes extends NominalsTypes {
@@ -74,9 +72,9 @@ export interface HistoryVoucherTopupTypes extends NominalsTypes {
   thumbnail: string;
 }
 
-export interface MemberOverviewDataTypes {
-  historyVoucherTopup: HistoryVoucherTopupTypes;
-  status: string;
+export interface HistoryTransactionTypes {
   _id: string;
+  historyVoucherTopup: HistoryVoucherTopupTypes;
   value: number;
+  status: string;
 }
