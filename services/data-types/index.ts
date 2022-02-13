@@ -48,6 +48,7 @@ export interface UserTypes {
   avatar: string;
 }
 
-export interface PayloadTypes {
+export interface JWTPayloadTypes {
   player: UserTypes;
+  iat: number;
 }
