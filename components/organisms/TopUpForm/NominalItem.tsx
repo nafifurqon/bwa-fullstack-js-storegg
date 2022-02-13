@@ -5,6 +5,7 @@ interface NominalItemProps {
   coinQuantity: number;
   coinName: string;
   price: number;
+  onChange: Function;
 }
 
 export default function NominalItem(props: NominalItemProps) {
@@ -13,6 +14,7 @@ export default function NominalItem(props: NominalItemProps) {
     coinQuantity,
     coinName,
     price,
+    onChange,
   } = props;
 
   return (
@@ -26,6 +28,7 @@ export default function NominalItem(props: NominalItemProps) {
         id={_id}
         name="topup"
         value={_id}
+        onChange={(event) => onChange(event)}
       />
       <div className="detail-card">
         <div className="d-flex justify-content-between">
