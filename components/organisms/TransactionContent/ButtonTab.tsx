@@ -3,7 +3,7 @@ import cx from 'classnames';
 interface ButtonTabProps {
   title: string;
   active?: boolean | false;
-  onClick: Function;
+  onClick: () => void;
 }
 
 export default function ButtonTab(props: Partial<ButtonTabProps>) {
