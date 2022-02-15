@@ -45,7 +45,7 @@ export default function TransactionDetailContent(props: TransactionDetailContent
                   </div>
                 </div>
                 <div>
-                  <p className="fw-medium text-center label pending m-0 rounded-pill">{data.status}</p>
+                  <p className={`fw-medium text-center label ${data.status} m-0 rounded-pill`}>{data.status}</p>
                 </div>
               </div>
               <hr />
@@ -60,11 +60,11 @@ export default function TransactionDetailContent(props: TransactionDetailContent
               </div>
               <div className="payment pt-10 pb-10">
                 <h2 className="fw-bold text-xl color-palette-1 mb-20">Payment Informations</h2>
-                <Row label="Your Account Name" value="Masayoshi Angga Zero" />
-                <Row label="Type" value="Worldwide Transfer" />
-                <Row label="Bank Name" value="Mandiri" />
-                <Row label="Bank Account Name" value="PT Store GG Indonesia" />
-                <Row label="Bank Number" value="1800 - 9090 - 2021" />
+                <Row label="Your Account Name" value={data.name} />
+                <Row label="Type" value={data.historyPayment.type} />
+                <Row label="Bank Name" value={data.historyPayment.bankName} />
+                <Row label="Bank Account Name" value={data.historyPayment.name} />
+                <Row label="Bank Number" value={data.historyPayment.accountNumber} />
               </div>
               <div className="d-md-block d-flex flex-column w-100">
                 <a
@@ -73,7 +73,6 @@ export default function TransactionDetailContent(props: TransactionDetailContent
                   role="button"
                 >
                   WhatsApp ke Admin
-
                 </a>
               </div>
             </section>
