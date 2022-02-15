@@ -72,9 +72,20 @@ export interface HistoryVoucherTopupTypes extends NominalsTypes {
   thumbnail: string;
 }
 
+export interface HistoryPaymentTypes {
+  accountNumber: string;
+  bankName: string;
+  name: string;
+  type: string;
+}
+
 export interface HistoryTransactionTypes {
   _id: string;
   historyVoucherTopup: HistoryVoucherTopupTypes;
   value: number;
   status: string;
+  accountUser: string;
+  tax: number;
+  name: string;
+  historyPayment: HistoryPaymentTypes;
 }
