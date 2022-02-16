@@ -1,7 +1,32 @@
+import Cookies from 'js-cookie';
+import jwtDecode from 'jwt-decode';
+import { useEffect, useState } from 'react';
 import Input from '../../components/atoms/Input';
 import Sidebar from '../../components/organisms/Sidebar';
+import { JWTPayloadTypes, UserTypes } from '../../services/data-types';
 
 export default function EditProfile() {
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    avatar: '',
+  });
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+
+    if (token) {
+      const jwtToken = atob(token!);
+      const payload: JWTPayloadTypes = jwtDecode(jwtToken);
+      const userFromPayload: UserTypes = payload.player;
+
+      const IMG = process.env.NEXT_PUBLIC_IMAGE;
+      userFromPayload.avatar = `${IMG}/${userFromPayload.avatar}`;
+
+      setUser(userFromPayload);
+    }
+  }, []);
+
   return (
     <section className="edit-profile overflow-auto">
       <Sidebar activeMenu="settings" />
@@ -11,30 +36,33 @@ export default function EditProfile() {
           <div className="bg-card pt-30 ps-30 pe-30 pb-30">
             <form action="">
               <div className="photo d-flex">
-                <div className="position-relative me-20">
-                  <img src="/img/avatar-1.png" width="90" height="90" className="avatar img-fluid" alt="" />
-                  <div
-                    className="avatar-overlay position-absolute top-0 d-flex justify-content-center align-items-center"
-                  >
-                    <img src="/icon/upload.svg" alt="icon upload" />
-                  </div>
-                </div>
                 <div className="image-upload">
                   <label htmlFor="avatar">
-                    <img src="/icon/upload.svg" alt="icon upload" width="90" height="90" />
+                    <img src={user.avatar} alt="icon upload" width="90" height="90" style={{borderRadius: '100%' }} />
                   </label>
                   <input id="avatar" type="file" name="avatar" accept="image/png, image/jpeg" />
                 </div>
               </div>
               <div className="pt-30">
-                <Input label="Full Name" type="text" name="name" />
+                <Input
+                  label="Full Name"
+                  type="text"
+                  name="full_name"
+                  value={user.name}
+                />
               </div>
               <div className="pt-30">
-                <Input label="Email Address" type="email" name="email" />
+                <Input
+                  label="Email Address"
+                  type="email"
+                  name="email"
+                  disabled
+                  value={user.email}
+                />
               </div>
-              <div className="pt-30">
+              {/* <div className="pt-30">
                 <Input label="Phone" type="tel" name="phone" />
-              </div>
+              </div> */}
               <div className="button-group d-flex flex-column pt-50">
                 <button
                   type="submit"
