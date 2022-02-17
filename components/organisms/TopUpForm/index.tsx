@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { BanksTypes, NominalsTypes, PaymentTypes } from '../../../services/data-types';
 import NominalItem from './NominalItem';

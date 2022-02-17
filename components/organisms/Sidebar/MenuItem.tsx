@@ -23,7 +23,10 @@ export default function MenuItem(props: Partial<MenuItemProps>) {
   return (
     <div
       className={classItem}
-      onClick={onClick}
+      onClick={() => {}}
+      onKeyPress={onClick}
+      role="button"
+      tabIndex={0}
     >
       <div className="me-3">
         <Image src={`/icon/${icon}.svg`} width={25} height={25} alt="menu overview" />
