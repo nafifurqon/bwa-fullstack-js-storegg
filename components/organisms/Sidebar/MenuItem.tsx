@@ -7,12 +7,12 @@ interface MenuItemProps {
   icon: 'ic-menu-overview' | 'ic-menu-transaction' | 'ic-menu-messages' | 'ic-menu-card' | 'ic-menu-reward' | 'ic-menu-setting' | 'ic-menu-logout';
   active?: boolean;
   href?: string;
-  onClick?: Function;
+  onClick?: () => void;
 }
 
 export default function MenuItem(props: Partial<MenuItemProps>) {
   const {
-    title, icon, active, href, onClick,
+    title, icon, active, href = '/', onClick,
   } = props;
   const classItem = cx({
     item: true,
@@ -32,7 +32,7 @@ export default function MenuItem(props: Partial<MenuItemProps>) {
         {onClick ? (
           <a className="text-lg text-decoration-none">{title}</a>
         ) : (
-          <Link href={href!}>
+          <Link href={href}>
             <a className="text-lg text-decoration-none">{title}</a>
           </Link>
         )}

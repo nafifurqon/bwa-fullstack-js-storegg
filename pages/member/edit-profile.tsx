@@ -8,13 +8,21 @@ import Sidebar from '../../components/organisms/Sidebar';
 import { JWTPayloadTypes, UserTypes } from '../../services/data-types';
 import { updateProfile } from '../../services/member';
 
+interface UserStateTypes {
+  id: string;
+  name: string;
+  email: string;
+  avatar: any,
+}
+
 export default function EditProfile() {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<UserStateTypes>({
+    id: '',
     name: '',
     email: '',
     avatar: '',
   });
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string|undefined>('/');
 
   const router = useRouter();
 
@@ -60,10 +68,10 @@ export default function EditProfile() {
               <div className="photo d-flex">
                 <div className="image-upload">
                   <label htmlFor="avatar">
-                    {imagePreview ? (
-                      <img src={imagePreview} alt="icon upload" width="90" height="90" style={{borderRadius: '100%' }} />
+                    {imagePreview === '/' ? (
+                      <img src={user.avatar} alt="icon upload" width="90" height="90" style={{ borderRadius: '100%' }} />
                     ) : (
-                      <img src={user.avatar} alt="icon upload" width="90" height="90" style={{borderRadius: '100%' }} />
+                      <img src={imagePreview} alt="icon upload" width="90" height="90" style={{ borderRadius: '100%' }} />
                     )}
                   </label>
                   <input
@@ -72,7 +80,7 @@ export default function EditProfile() {
                     name="avatar"
                     accept="image/png, image/jpeg"
                     onChange={(event) => {
-                      const img: File | null = event.target.files[0];
+                      const img: File | null = event.target.files![0];
                       setImagePreview(URL.createObjectURL(img));
                       return setUser({
                         ...user,
