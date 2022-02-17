@@ -4,6 +4,7 @@ import Navbar from '../../components/organisms/Navbar';
 import Footer from '../../components/organisms/Footer';
 import { getDetailVoucher, getFeaturedGame } from '../../services/player';
 import { GameItemTypes, NominalsTypes, PaymentTypes } from '../../services/data-types';
+import { useEffect } from 'react';
 
 interface DetailProps {
   dataItem: GameItemTypes;
@@ -12,6 +13,10 @@ interface DetailProps {
 }
 
 export default function Detail({ dataItem, nominals, payments }: DetailProps) {
+  useEffect(() => {
+    localStorage.setItem('data-item', JSON.stringify(dataItem));
+  }, []);
+
   return (
     <>
       <Navbar />
