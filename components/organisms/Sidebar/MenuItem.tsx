@@ -23,7 +23,7 @@ export default function MenuItem(props: Partial<MenuItemProps>) {
   return (
     <div
       className={classItem}
-      onClick={() => {}}
+      onClick={onClick}
       onKeyPress={onClick}
       role="button"
       tabIndex={0}
