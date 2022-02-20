@@ -15,13 +15,11 @@ export default function CheckoutItem() {
     setDataItem(dataItemLocal);
   }, []);
 
-  const IMG = process.env.NEXT_PUBLIC_IMAGE;
-
   return (
     <div className="game-checkout d-flex flex-row align-items-center pt-md-50 pb-md-50 pt-30 pb-30">
       <div className="pe-4">
         <div className="cropped">
-          <img src={`${IMG}/${dataItem.thumbnail}`} className="img-fluid" alt="" />
+          <img src={dataItem.thumbnail} className="img-fluid" alt="" />
         </div>
       </div>
       <div>

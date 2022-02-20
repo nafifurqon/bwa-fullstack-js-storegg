@@ -24,8 +24,6 @@ export default function OverviewContent() {
     getMemberOverviewAPI();
   }, []);
 
-  const IMG = process.env.NEXT_PUBLIC_IMAGE;
-
   return (
     <main className="main-wrapper">
       <div className="ps-lg-0">
@@ -67,7 +65,7 @@ export default function OverviewContent() {
                     item={`${item.historyVoucherTopup.coinQuantity} ${item.historyVoucherTopup.coinName}`}
                     price={item.value}
                     status={item.status}
-                    image={`${IMG}/${item.historyVoucherTopup.thumbnail}`}
+                    image={item.historyVoucherTopup.thumbnail}
                   />
                 ))}
               </tbody>

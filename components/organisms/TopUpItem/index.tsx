@@ -11,7 +11,6 @@ interface TopUpItemProps {
 
 export default function TopUpItem(props: TopUpItemProps) {
   const { type, data } = props;
-  const ROOT_IMG = process.env.NEXT_PUBLIC_IMAGE;
 
   if (type === 'desktop') {
     return (
@@ -34,7 +33,7 @@ export default function TopUpItem(props: TopUpItemProps) {
     <div className="row align-items-center">
       <div className="col-md-12 col-4">
         <img
-          src={`${ROOT_IMG}/${data.thumbnail}`}
+          src={data.thumbnail}
           width="280"
           height="380"
           className="img-fluid"

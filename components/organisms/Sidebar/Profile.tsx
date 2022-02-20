@@ -18,8 +18,10 @@ export default function Profile() {
       const payload: JWTPayloadTypes = jwtDecode(jwtToken);
       const userFromPayload: UserTypes = payload.player;
 
-      const IMG = process.env.NEXT_PUBLIC_IMAGE;
-      userFromPayload.avatar = `${IMG}/${userFromPayload.avatar}`;
+      if (userFromPayload.avatar && !userFromPayload.avatar.includes('cloudinary')) {
+        const IMG = process.env.NEXT_PUBLIC_IMAGE;
+        userFromPayload.avatar = `${IMG}/${userFromPayload.avatar}`;
+      }
 
       setUser(userFromPayload);
     }

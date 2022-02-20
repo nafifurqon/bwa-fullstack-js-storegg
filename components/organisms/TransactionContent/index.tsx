@@ -31,8 +31,6 @@ export default function TransactionContent() {
     getMemberTransactionAPI(value);
   };
 
-  const IMG = process.env.NEXT_PUBLIC_IMAGE;
-
   return (
     <main className="main-wrapper">
       <div className="ps-lg-0">
@@ -76,7 +74,7 @@ export default function TransactionContent() {
                 {transactions.map((transaction: HistoryTransactionTypes) => (
                   <TableRow
                     key={transaction._id}
-                    image={`${IMG}/${transaction.historyVoucherTopup.thumbnail}`}
+                    image={transaction.historyVoucherTopup.thumbnail}
                     title={transaction.historyVoucherTopup.gameName}
                     category={transaction.historyVoucherTopup.category}
                     item={`${transaction.historyVoucherTopup.coinQuantity} ${transaction.historyVoucherTopup.coinName}`}

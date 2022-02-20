@@ -15,8 +15,6 @@ export default function FeaturedGame() {
     getFeatureGameList();
   }, []);
 
-  const API_IMAGE = process.env.NEXT_PUBLIC_IMAGE;
-
   return (
     <section className="featured-game pt-50 pb-50">
       <div className="container-fluid">
@@ -35,7 +33,7 @@ export default function FeaturedGame() {
               key={item._id}
               title={item.name}
               category={item.category.name}
-              thumbnail={`${API_IMAGE}/${item.thumbnail}`}
+              thumbnail={item.thumbnail}
               id={item._id}
             />
           ))}
