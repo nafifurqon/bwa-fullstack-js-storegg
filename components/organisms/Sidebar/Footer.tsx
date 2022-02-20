@@ -1,4 +1,8 @@
+import { useRouter } from 'next/router';
+
 export default function Footer() {
+  const router = useRouter();
+
   return (
     <div className="sidebar-footer pt-73 pe-30">
       <div className="footer-card">
@@ -59,14 +63,14 @@ export default function Footer() {
 
           </p>
         </div>
-        <a
+        <button
           className="btn btn-get-started w-100 fw-medium text-xs text-center text-white rounded-pill"
-          href="#"
-          role="button"
+          type="button"
+          onClick={() => router.push('/')}
         >
           Get Started
 
-        </a>
+        </button>
       </div>
     </div>
   );
